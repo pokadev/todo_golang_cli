@@ -66,10 +66,16 @@ func (t *Todos) Load(filename string) error {
 }
 
 func (t *Todos) Store(filename string) error {
-  data,err := json.Marshal(t)
-  if err != nil {
-    return err
-  }
+	data, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
 
-  return os.WriteFile(filename, data, 0644)
+	return os.WriteFile(filename, data, 0644)
+}
+
+func (t *Todos) Print() {
+	for i, item := range *t {
+		fmt.Printf("%d - %s\n", i+1, item.Task)
+	}
 }
